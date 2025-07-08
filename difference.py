@@ -11,6 +11,7 @@ blur1=cv.GaussianBlur(gray1,(5,5),1.0)
 blur2=cv.GaussianBlur(gray2,(5,5),1.0)
 diff=cv.absdiff(blur1,blur2)
 threshold,thresh=cv.threshold(diff,100,255,cv.THRESH_BINARY_INV)
+cv.imshow("thresh",thresh)
 contours,hierachies=cv.findContours(thresh,cv.RETR_LIST,cv.CHAIN_APPROX_SIMPLE)
 for i in contours:
     if cv.contourArea(i)>1000:
