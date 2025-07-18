@@ -1,5 +1,6 @@
 import cv2
-img=cv2.imread("./photos/dog.jpg")
+import numpy as np
+img=np.zeros([500,400,3],np.uint8)
 resized=cv2.resize(img,(100,200))
 gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 croped=img[10:500,20:100]
@@ -9,6 +10,7 @@ hsv=cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 cv2.line(img, (0, 0), (200, 200), (0, 255, 0), 3)
 cv2.rectangle(img, (50, 50), (150, 150), (255, 0, 0), 2)
 cv2.circle(img, (100, 100), 40, (0, 0, 255), -1) 
+cv2.arrowedLine(img,(0,255),(255,255),(255,255,0),5)
 cv2.putText(img,"I am a cute Puppy",(10,300),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),2)
 
 def rescaleFrame(frame,scale=0.5):
