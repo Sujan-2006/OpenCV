@@ -9,8 +9,8 @@ output=cv.VideoWriter('Output_video.mp4',fourcc,20.0,(640,480))
 while(cap.isOpened()):
     ret,frame=cap.read()
     if ret==True:       
-        text="Width :"+str()
-        cv.putText(frame,"I am SUJAN",(20,50),cv.FONT_HERSHEY_COMPLEX,1,(0,0,255),2,cv.LINE_AA)
+        text="Width :"+str(cap.get(3))+"Height :"+str(cap.get(4))
+        frame=cv.putText(frame,text,(20,50),cv.FONT_HERSHEY_COMPLEX,1,(255,0,255),2,cv.LINE_AA)
         output.write(frame)
         cv.imshow("Frame",frame)
         if cv.waitKey(1) & 0xFF == ord("a"):
