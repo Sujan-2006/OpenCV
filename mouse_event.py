@@ -6,16 +6,16 @@ print(events)
 '''
 def clickEvent(event,x,y,flags,param):
     if event==cv.EVENT_LBUTTONDOWN:
+        blue=img[x,y,0]
+        green=img[x,y,1]
+        red=img[x,y,2]
         cv.circle(img,(x,y),3,(255,0,0),-1)
-        points.append((x,y))
-        if len(points)>=2:
-            cv.line(img,points[-1],points[-2],(0,0,255),2)
-       
-        cv.imshow("image",img)
+        blank=np.zeros((512,512,3),np.uint8)
+        blank[:]=[blue,green,red] #to fill every point or pixel with the color of the point clicked on the original img
+        cv.imshow("Colored Img",blank)
 
 img=cv.imread("./photos/LZS.jpg")
 cv.imshow("image",img)
-points=[]
 cv.setMouseCallback("image",clickEvent)
 cv.waitKey(0)
 cv.destroyAllWindows()
