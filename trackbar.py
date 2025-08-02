@@ -1,31 +1,32 @@
 import cv2 as cv
-import numpy as np
 
 def nothing(x):
     print(x)
-blank=np.zeros((500,500,3),dtype='uint8')
+ 
 cv.namedWindow("TRACKBAR")
 
-cv.createTrackbar("B","TRACKBAR",0,255,nothing)
-cv.createTrackbar("G","TRACKBAR",0,255,nothing)
-cv.createTrackbar("R","TRACKBAR",0,255,nothing)
+cv.createTrackbar("CP","TRACKBAR",10,400,nothing)
 
-switch="0:OFF\n1:ON"
+switch="color/gray"
 cv.createTrackbar(switch,"TRACKBAR",0,1,nothing)
 
 while(1):
-    cv.imshow("TRACKBAR",blank)
+    pic=cv.imread("./photos/dog.jpg")
+    
+    curr_pos=cv.getTrackbarPos("CP","TRACKBAR")
+    font=cv.FONT_HERSHEY_SIMPLEX
+    cv.putText(pic,str(curr_pos),(20,100),font,2,(0,0,255),3,cv.LINE_AA)
+     
     k=cv.waitKey(1) & 0xFF
-    if k==ord("a"):
+    if k==27:
         break
-    blue=cv.getTrackbarPos("B","TRACKBAR")
-    green=cv.getTrackbarPos("G","TRACKBAR")
-    red=cv.getTrackbarPos("R","TRACKBAR")
+    
     sw=cv.getTrackbarPos(switch,"TRACKBAR")
 
     if sw==0:
-        blank[:]=0
+        pic[:]=0
     else:
-        blank[:]=[blue,green,red]
+        pic=cv.cvtColor(pic,cv.COLOR_BGR2GRAY)
+    cv.imshow("TRACKBAR",pic)
   
 cv.destroyAllWindows()
